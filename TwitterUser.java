@@ -114,7 +114,7 @@ public class TwitterUser implements User, Element,ActionListener{
 	public JFrame buildGUI() {
 		frame = new JFrame(getID() + " 's User View");
 		frame.setPreferredSize(new Dimension(400, 450));
-		frame.getContentPane().setLayout(new GridLayout(2, 1, 3, 4));
+		frame.getContentPane().setLayout(new GridLayout(2, 1, 5, 5));
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		//JPanels
@@ -164,6 +164,7 @@ public class TwitterUser implements User, Element,ActionListener{
 		frame.getContentPane().add(topPanel);
 		frame.getContentPane().add(bottomPanel);
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		return frame;
 	}
