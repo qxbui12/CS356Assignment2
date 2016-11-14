@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-public class TwitterUser implements User, Element,ActionListener{
+public class TwitterUser implements User, Element,ActionListener, KeyListener{
 
 	private String id, tweetMsg;
 	private long startTime , updateTime;
@@ -135,7 +135,9 @@ public class TwitterUser implements User, Element,ActionListener{
 	}
 	public void createJTextFields(){
 		userID = new JTextField(10);
+		userID.addKeyListener(this);
 		messageField = new JTextField(10);
+		messageField.addKeyListener(this);
 	}
 	public void createJButtons(){
 		follow = new JButton("Follow user");
@@ -189,6 +191,33 @@ public class TwitterUser implements User, Element,ActionListener{
 		} else {
 			return;
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()== KeyEvent.VK_ENTER){
+			if(userID.hasFocus()){
+				if (!subscriptions.contains(userID.getText()) && ControlPanel.run().getUserMap().get(userID.getText().toLowerCase()) != null) {
+					subscribe(ControlPanel.run().getUserMap().get(userID.getText().toLowerCase()));
+				}
+			}
+			if(messageField.hasFocus()){
+				tweet(messageField.getText());
+			}
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
