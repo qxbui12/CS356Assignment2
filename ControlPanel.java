@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
-public class ControlPanel implements ActionListener {
+public class ControlPanel implements ActionListener, KeyListener {
 
 	private static ControlPanel adminInstance = null;
 	private HashMap<String, TwitterUser> userMap;
@@ -189,7 +189,9 @@ public class ControlPanel implements ActionListener {
 		treePanel.add(treePane);
 
 		userName = new JTextField("default");
+		userName.addKeyListener(this);
 		groupName = new JTextField("default");
+		groupName.addKeyListener(this);
 
 		//help message
 		helpTxt = new JLabel("Hello.");
@@ -257,6 +259,7 @@ public class ControlPanel implements ActionListener {
 		inMid.add(helpTxt, c);
 		
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
@@ -277,6 +280,32 @@ public class ControlPanel implements ActionListener {
 			}
 			return this;
 		}
+	}
+
+	public void keyPressed(KeyEvent arg0) {
+		if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
+			if(userName.hasFocus()){
+				if (selectedNode == null || !(selectedNode.getUserObject() instanceof TwitterUser)){
+					addUser(userName.getText().toLowerCase());
+				}
+			}
+			if(groupName.hasFocus()){
+				if (selectedNode == null || !(selectedNode.getUserObject() instanceof TwitterUser))
+					addGroup(groupName.getText().toLowerCase());
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
