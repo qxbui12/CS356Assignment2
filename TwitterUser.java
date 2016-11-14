@@ -112,36 +112,47 @@ public class TwitterUser implements User, Element,ActionListener{
 
 	//Creating the GUI
 	public JFrame buildGUI() {
+		createJFrame();
+		createJPanels();
+		createJTextFields();
+		createJButtons();
+		createJLists();
+		createJScroll();
+		createGridBagLayout();
+		displayJFrame();
+		return frame;
+	}
+	public void createJFrame(){
 		frame = new JFrame(getID() + " 's User View");
 		frame.setPreferredSize(new Dimension(400, 450));
 		frame.getContentPane().setLayout(new GridLayout(2, 1, 5, 5));
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		//JPanels
+	}
+	public void createJPanels(){
 		topPanel = new JPanel();
 		topPanel.setLayout(new GridBagLayout());
 		bottomPanel = new JPanel();
 		bottomPanel.setLayout(new GridBagLayout());
-
-		//create 2 user input fields
+	}
+	public void createJTextFields(){
 		userID = new JTextField(10);
 		messageField = new JTextField(10);
-
-		//Buttons
+	}
+	public void createJButtons(){
 		follow = new JButton("Follow user");
 		follow.addActionListener(this);
 		tweet = new JButton("Tweet");
 		tweet.addActionListener(this);
-
-		//Follow list and newsFeed list
+	}
+	public void createJLists(){
 		userList = new JList<String>(subscriptions);
 		messageList = new JList<String>(newsFeed);
-
-		//List Scroll
+	}
+	public void createJScroll(){
 		userPane = new JScrollPane(userList);
 		newsFeedPane = new JScrollPane(messageList);
-
-		//GridBagLayout
+	}
+	public void createGridBagLayout(){
 		c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 0.5;
@@ -160,16 +171,14 @@ public class TwitterUser implements User, Element,ActionListener{
 		c.gridwidth = 2;
 		topPanel.add(userPane, c);
 		bottomPanel.add(newsFeedPane, c);
-
+	}
+	public void displayJFrame(){
 		frame.getContentPane().add(topPanel);
 		frame.getContentPane().add(bottomPanel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		return frame;
 	}
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Follow user")) {
