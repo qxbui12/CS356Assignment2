@@ -110,8 +110,7 @@ public class TwitterUser implements User, Element,ActionListener{
 		return getID();
 	}
 
-	//Creating the GUI
-	public JFrame buildGUI() {
+	public JFrame generateUI() {
 		createJFrame();
 		createJPanels();
 		createJTextFields();
