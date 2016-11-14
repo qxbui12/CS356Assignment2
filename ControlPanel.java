@@ -135,14 +135,22 @@ public class ControlPanel implements ActionListener, KeyListener {
 	
 	//Admin UI
 	public void generateUI() {
-
-		//Frame
+		createJFrame();
+		createJPanels();
+		createJButtons();
+		createJTree();
+		createJTextField();
+		createJLabels();
+		createGridBagLayout();
+		displayJFrame();
+	}
+	public void createJFrame(){
 		frame = new JFrame("Control Panel");
 		frame.setPreferredSize(new Dimension(800, 500));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new GridBagLayout());
-
-		//Panels
+	}
+	public void createJPanels(){
 		treePanel = new JPanel();
 		buttonPanel = new JPanel();
 		inTop = new JPanel();
@@ -155,9 +163,8 @@ public class ControlPanel implements ActionListener, KeyListener {
 		inTop.setLayout(new GridBagLayout());
 		inMid.setLayout(new GridBagLayout());
 		inBottom.setLayout(new GridBagLayout());
-
-
-		//Buttons
+	}
+	public void createJButtons(){
 		addUser = new JButton("Add User");
 		addUser.addActionListener(this);
 		addGroup= new JButton("Add Group");
@@ -172,8 +179,8 @@ public class ControlPanel implements ActionListener, KeyListener {
 		positiveMessage.addActionListener(this);
 		userView = new JButton("Open user view");
 		userView.addActionListener(this);
-
-		//Tree
+	}
+	public void createJTree(){
 		root = new DefaultMutableTreeNode(new UserGroup("root"));
 		modelTree = new DefaultTreeModel(root);
 		tree = new JTree(modelTree);
@@ -187,17 +194,19 @@ public class ControlPanel implements ActionListener, KeyListener {
 		
 		treePane = new JScrollPane(tree);
 		treePanel.add(treePane);
-
+	}
+	public void createJTextField(){
 		userName = new JTextField("default");
 		userName.addKeyListener(this);
 		groupName = new JTextField("default");
 		groupName.addKeyListener(this);
-
-		//help message
+	}
+	
+	public void createJLabels(){
 		helpTxt = new JLabel("Hello.");
 		helpTxt.setHorizontalAlignment(SwingConstants.CENTER);
-
-		//GridBagLayout
+	}
+	public void createGridBagLayout(){
 		c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 0.5;
@@ -257,7 +266,8 @@ public class ControlPanel implements ActionListener, KeyListener {
 		c.weighty = 0.3;
 		c.weightx = 0.6;
 		inMid.add(helpTxt, c);
-		
+	}
+	public void displayJFrame(){
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
